@@ -1,0 +1,80 @@
+﻿<Window x:Class="DreamLab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:DreamLab.MVVM.ViewModel"
+        xmlns:core="clr-namespace:DreamLab.Core"
+        xmlns:converters="clr-namespace:DreamLab.Core"
+        mc:Ignorable="d"
+        Title="DreamLab" Height="720" Width="1280"
+        WindowState="Normal" WindowStyle="SingleBorderWindow">
+
+    <Window.Resources>
+        <converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+
+    <Grid Background="#272537">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Pasek górny -->
+        <Border Grid.ColumnSpan="2"
+                Height="75"
+                Background="#1E1B2A"
+                Visibility="{Binding IsInGame, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+            <TextBlock Text="DreamLab"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontSize="22"
+                       Margin="22,0,0,0"/>
+        </Border>
+
+        <!-- Panel boczny -->
+        <StackPanel Grid.Row="1"
+                    Visibility="{Binding IsInGame, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+            <RadioButton Content="Start"
+                         Height="50"
+                         Foreground="White"
+                         FontSize="18"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Command="{Binding StartCommand}"/>
+            <RadioButton Content="Ostatnie wyniki"
+                         Height="50"
+                         Foreground="White"
+                         FontSize="18"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Command="{Binding ResultsCommand}"/>
+            <RadioButton Content="Ustawienia"
+                         Height="50"
+                         Foreground="White"
+                         FontSize="18"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Command="{Binding SettingsCommand}"/>
+            <RadioButton Content="Wyjście"
+                         Height="50"
+                         Foreground="White"
+                         FontSize="18"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Command="{Binding ExitCommand}"/>
+        </StackPanel>
+
+        <!-- Główna zawartość (zmienia się dynamicznie) -->
+        <ContentControl Grid.Row="1"
+                        Grid.Column="1"
+                        Grid.RowSpan="2"
+                        Grid.ColumnSpan="2"
+                        Content="{Binding CurrentView}"/>
+    </Grid>
+</Window>

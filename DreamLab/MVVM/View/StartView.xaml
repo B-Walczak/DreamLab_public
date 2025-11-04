@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="DreamLab.MVVM.View.StartView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#38344F">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="211" Width="470">
+            <RadioButton Content="Kolory" FontSize="18" Foreground="White" Margin="5" Style="{StaticResource MenuButtonTheme}"/>
+            <RadioButton Content="Kolory + Pedały" FontSize="18" Foreground="White" Margin="5" Style="{StaticResource MenuButtonTheme}"/>
+            <RadioButton Content="Dopasowywanie kształtów" FontSize="18" Foreground="White" Margin="5" Style="{StaticResource MenuButtonTheme}"/>
+
+            <Button Content="Start"
+                    Command="{Binding DataContext.StartColorsGameCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                    Margin="0,40,0,0"
+                    Height="50"
+                    FontSize="18"
+                    Background="#1E1B2A"
+                    Foreground="White"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0">
+            <TextBlock Text="Ustawienia testu" 
+               FontSize="28" 
+               Foreground="White"
+               TextAlignment="Center"
+               Margin="0,0,0,20"/>
+
+            <!-- CZAS TRWANIA GRY -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                <TextBlock Text="Czas trwania: " 
+                   FontSize="22" 
+                   Foreground="White"
+                   VerticalAlignment="Center"/>
+                <Button Content="&lt;" 
+                FontSize="22" 
+                Width="40"
+                Command="{Binding DecreaseGameTimeCommand}"
+                Margin="10,0"/>
+                <TextBlock Text="{Binding GameDurationText}" 
+                   FontSize="22" 
+                   Foreground="LightGreen"
+                   VerticalAlignment="Center"
+                   Width="100"
+                   TextAlignment="Center"/>
+                <Button Content="&gt;" 
+                FontSize="22" 
+                Width="40"
+                Command="{Binding IncreaseGameTimeCommand}"
+                Margin="10,0"/>
+            </StackPanel>
+
+            <!-- CZAS REAKCJI -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                <TextBlock Text="Czas między kolorami: " 
+                   FontSize="22" 
+                   Foreground="White"
+                   VerticalAlignment="Center"/>
+                <Button Content="&lt;" 
+                FontSize="22" 
+                Width="40"
+                Command="{Binding DecreaseReactionTimeCommand}"
+                Margin="10,0"/>
+                <TextBlock Text="{Binding ReactionTimeText}" 
+                   FontSize="22" 
+                   Foreground="LightGreen"
+                   VerticalAlignment="Center"
+                   Width="100"
+                   TextAlignment="Center"/>
+                <Button Content="&gt;" 
+                FontSize="22" 
+                Width="40"
+                Command="{Binding IncreaseReactionTimeCommand}"
+                Margin="10,0"/>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

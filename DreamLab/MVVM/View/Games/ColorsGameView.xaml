@@ -1,0 +1,108 @@
+﻿<UserControl x:Class="DreamLab.MVVM.View.Games.ColorsGameView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:DreamLab.MVVM.ViewModel.Games"
+             Background="#1E1B2A"
+             Focusable="True"
+             KeyDown="UserControl_KeyDown"
+             Loaded="UserControl_Loaded">
+
+    <UserControl.DataContext>
+        <vm:ColorsGameViewModel/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <!-- Widok samych kółek gry -->
+        <Grid Visibility="{Binding IsGameVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+            <UniformGrid Rows="2" Columns="5" Margin="50" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Ellipse Fill="{Binding Circles[0]}" Width="80" Height="80" Margin="10"/>
+                <Ellipse Fill="{Binding Circles[1]}" Width="80" Height="80" Margin="10"/>
+                <Ellipse Fill="{Binding Circles[2]}" Width="80" Height="80" Margin="10"/>
+                <Ellipse Fill="{Binding Circles[3]}" Width="80" Height="80" Margin="10"/>
+                <Ellipse Fill="{Binding Circles[4]}" Width="80" Height="80" Margin="10"/>
+                <Ellipse Fill="{Binding Circles[5]}" Width="80" Height="80" Margin="10"/>
+                <Ellipse Fill="{Binding Circles[6]}" Width="80" Height="80" Margin="10"/>
+                <Ellipse Fill="{Binding Circles[7]}" Width="80" Height="80" Margin="10"/>
+                <Ellipse Fill="{Binding Circles[8]}" Width="80" Height="80" Margin="10"/>
+                <Ellipse Fill="{Binding Circles[9]}" Width="80" Height="80" Margin="10"/>
+            </UniformGrid>
+
+            <DockPanel VerticalAlignment="Bottom" Height="80" Background="#272537">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20,0">
+                    <TextBlock Text="Czas: " Foreground="White" FontSize="18"/>
+                    <TextBlock Text="{Binding ElapsedTime}" Foreground="LightGreen" FontSize="18" Margin="5,0"/>
+                    <TextBlock Text=" | Trafność: " Foreground="White" FontSize="18" Margin="20,0,0,0"/>
+                    <TextBlock FontSize="18" Foreground="LightGreen" Margin="5,0">
+                        <Run Text="{Binding Accuracy}"/>
+                        <Run Text="%"/>
+                    </TextBlock>
+                </StackPanel>
+
+                <Button Content="Wyjście"
+                        Command="{Binding ExitCommand}"
+                        Background="Crimson" Foreground="White"
+                        FontSize="18" Width="100" Margin="0,0,20,0"
+                        HorizontalAlignment="Right"/>
+            </DockPanel>
+        </Grid>
+
+        <!-- Ekran powitalny / tutorial -->
+        <Grid Visibility="{Binding IsTutorialVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Viewbox Stretch="Uniform">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="1000">
+                    <TextBlock Text="Witaj w grze KOLORY!"
+                               Foreground="White"
+                               FontSize="40"
+                               TextAlignment="Center"
+                               Margin="0,0,0,20"/>
+                    <TextBlock Text="Na ekranie będą pojawiać się kolory w losowych miejscach. Twoim zadaniem jest nacisnąć odpowiedni klawisz na klawiaturze:"
+                               Foreground="White"
+                               FontSize="24"
+                               TextAlignment="Center"
+                               Margin="0,0,0,10"/>
+                    <TextBlock Text="C = Czerwony | E = Niebieski | Y = Biały | I = Żółty | M = Zielony"
+                               Foreground="LightGreen"
+                               FontSize="26"
+                               TextAlignment="Center"
+                               Margin="0,20,0,10"/>
+                    <TextBlock Text="Kliknij SPACJĘ, aby rozpocząć test!"
+                               Foreground="Yellow"
+                               FontSize="28"
+                               FontWeight="Bold"
+                               TextAlignment="Center"
+                               Margin="0,60,0,0"/>
+                </StackPanel>
+            </Viewbox>
+        </Grid>
+
+        <!-- Odliczanie 3...2...1 -->
+        <Grid Visibility="{Binding IsCountdownVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+            <TextBlock Text="{Binding CountdownText}"
+                       FontSize="120"
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- Ekran wyników -->
+        <Grid Visibility="{Binding IsResultsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Viewbox Stretch="Uniform">
+                <Border VerticalAlignment="Center" HorizontalAlignment="Center"
+                Width="800" Background="#1E1B2A" Padding="40" CornerRadius="20">
+                    <StackPanel>
+                        <TextBlock Text="WYNIKI TESTU" Foreground="White" FontSize="48" FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,30"/>
+
+                        <TextBlock Text="{Binding ElapsedTime, StringFormat='Czas trwania: {0}'}" Foreground="LightGray" FontSize="24" TextAlignment="Center" Margin="0,0,0,10"/>
+                        <TextBlock Text="{Binding Accuracy, StringFormat='Celność: {0}%'}" Foreground="LightGreen" FontSize="28" FontWeight="Bold" TextAlignment="Center" Margin="0,0,0,30"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Content="Powtórz test" Command="{Binding RetryCommand}" Width="200" Height="60" Margin="10" Background="#2E8B57" Foreground="White" FontSize="20"/>
+                            <Button Content="Zakończ" Command="{Binding ExitCommand}" Width="200" Height="60" Margin="10" Background="Crimson" Foreground="White" FontSize="20"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Viewbox>
+        </Grid>
+
+    </Grid>
+</UserControl>
