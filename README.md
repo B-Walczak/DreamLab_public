@@ -25,11 +25,6 @@ Aplikacja została zbudowana w oparciu o rygorystyczne przestrzeganie wzorca **M
 * **RelayCommand:** Autorska implementacja interfejsu `ICommand`, pozwalająca na eleganckie wywoływanie akcji z poziomu widoków `.xaml` bez zaśmiecania pliku "code-behind".
 * **Value Converters:** Zastosowanie konwerterów (np. `InverseBoolToVisibilityConverter`) do dynamicznego zarządzania widocznością elementów UI na podstawie stanu logiki biznesowej.
 
-## 📸 Zrzuty ekranu
-
-> *Miejsce na zrzut ekranu głównego okna aplikacji*
-> `<img src="link_do_twojego_zdjecia_na_githubie" width="600">`
-
 ## 💻 Struktura Projektu (Skrócona)
 ```text
 DreamLab/
